@@ -1,0 +1,6 @@
+services:
+    rest.services_transform_representation.transform_by_request.user_representation:
+        class: RestBundle\Services\TransformRepresentation\TransformByRequest
+        arguments: ['@jms_serializer', '@validator']
+        calls:
+            - [setClassPath, [RestBundle\Representation\CustomerRepresentation]]

@@ -1,5 +1,6 @@
 PaymentBundle\Entity\Customer:
     type: entity
+    repositoryClass: PaymentBundle\Persistent\CustomerRepository
     table: pay_customers
     uniqueConstraints:
         customer_id_uindex:
