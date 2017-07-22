@@ -1,0 +1,12 @@
+AuthenticationBundle\Entity\User:
+    type: entity
+    table: users
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: AUTO

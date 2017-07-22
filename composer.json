@@ -5,7 +5,9 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+            "AppBundle\\": "src/AppBundle",
+            "PaymentBundle\\": "src/PaymentBundle",
+            "AuthenticationBundle\\": "src/AuthenticationBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
@@ -16,10 +18,15 @@
         "php": ">=7.1",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
+        "friendsofsymfony/oauth-server-bundle": "1.5.2",
+        "friendsofsymfony/rest-bundle": "2.2.0",
+        "friendsofsymfony/user-bundle": "2.0.x-dev",
         "incenteev/composer-parameter-handler": "~2.0",
+        "jms/serializer-bundle": "2.0.0",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/monolog-bundle": "^3.0.2",
+        "symfony/swiftmailer-bundle": "2.3.10",
         "symfony/symfony": "2.8.*",
         "twig/twig": "^1.0||^2.0"
     },

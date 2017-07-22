@@ -1,3 +1,14 @@
+authentication:
+    resource: "@AuthenticationBundle/Resources/config/routing.yml"
+    prefix:   /api
+
+payment:
+    resource: "@PaymentBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

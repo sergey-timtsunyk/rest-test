@@ -1,0 +1,55 @@
+PaymentBundle\Entity\Transaction:
+    type: entity
+    table: pay_transactions
+    indexes:
+        transaction_customer_id_fk:
+            columns:
+                - customer_id
+    uniqueConstraints:
+        transaction_id_uindex:
+            columns:
+                - id
+        transaction_amount_uindex:
+            columns:
+                - amount
+        transaction_date_uindex:
+            columns:
+                - date
+        transaction_amount_date_uindex:
+            columns:
+                - amount
+                - date
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        amount:
+            type: decimal
+            nullable: false
+            precision: 11
+            scale: 2
+        date:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: create
+                on: update
+    manyToOne:
+        customer:
+            targetEntity: Customer
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                customer_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
