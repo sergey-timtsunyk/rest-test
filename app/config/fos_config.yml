@@ -4,6 +4,7 @@ fos_rest:
         include_format: false                           # We do not include format in request, so that all responses
     access_denied_listener:                             # will eventually be JSON formated
         json: true
+    param_fetcher_listener: true
 
 fos_user:
     db_driver: orm

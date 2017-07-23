@@ -11,8 +11,7 @@ namespace RestBundle\ResourceHandler;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\FOSRestController;
 use PaymentBundle\Entity\Customer;
-use RestBundle\Representation\CustomerRepresentation;
-use RestBundle\Services\TransformRepresentation\TransformByRequest;
+use RestBundle\Representation\Request\CustomerRepresentation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @RouteResource("Customers")
  */
-class CustomerHandler extends FOSRestController
+class CustomersHandler extends FOSRestController
 {
     /**
      * @param Request $request
@@ -30,21 +29,24 @@ class CustomerHandler extends FOSRestController
      */
     public function postAction(Request $request)
     {
-        /** @var CustomerRepresentation $customerRepresentation */
-        $customerRepresentation = $this->getTransformByRequest()->createRepresentation($request);
+        $customerRepresentation = $this->getCustomerRepresentationByRequest($request);
         $customer = $this
             ->getDoctrine()
             ->getRepository(Customer::class)
-            ->createByUserRepresentation($customerRepresentation);
+            ->createByCustomerRepresentation($customerRepresentation);
 
         return $this->handleView($this->view(["id" => $customer->getId()], 201));
     }
 
     /**
-     * @return TransformByRequest
+     * @param Request $request
+     *
+     * @return CustomerRepresentation
      */
-    public function getTransformByRequest() : TransformByRequest
+    private function getCustomerRepresentationByRequest(Request $request) : CustomerRepresentation
     {
-        return $this->get('rest.services_transform_representation.transform_by_request.user_representation');
+        return $this
+            ->get('rest.services_transform_representation.request.customer_representation')
+            ->createRepresentation($request);
     }
 }

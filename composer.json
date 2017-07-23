@@ -17,6 +17,7 @@
     },
     "require": {
         "php": ">=7.1",
+        "beberlei/DoctrineExtensions": "1.0.x-dev",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
         "friendsofsymfony/oauth-server-bundle": "1.5.2",

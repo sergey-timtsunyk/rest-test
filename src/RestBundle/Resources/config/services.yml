@@ -1,6 +1,26 @@
 services:
-    rest.services_transform_representation.transform_by_request.user_representation:
+    rest.services_transform_representation.request.customer_representation:
         class: RestBundle\Services\TransformRepresentation\TransformByRequest
         arguments: ['@jms_serializer', '@validator']
         calls:
-            - [setClassPath, [RestBundle\Representation\CustomerRepresentation]]
+            - [setClassPath, [RestBundle\Representation\Request\CustomerRepresentation]]
+
+    rest.services_transform_representation.request.transaction_representation:
+        class: RestBundle\Services\TransformRepresentation\TransformByRequest
+        arguments: ['@jms_serializer', '@validator']
+        calls:
+            - [setClassPath, [RestBundle\Representation\Request\TransactionsRepresentation]]
+
+    rest.services_transform_representation.response:
+        class: RestBundle\Services\TransformRepresentation\TransformByResponse
+        abstract:  true
+        arguments: ['@jms_serializer']
+
+    rest.services_transform_representation.transaction_by_response:
+        class: RestBundle\Services\TransformRepresentation\TransformTransactionByResponse
+        parent: rest.services_transform_representation.response
+
+    rest.services_transform_representation.update_transaction_by_response:
+        class: RestBundle\Services\TransformRepresentation\TransformUpdateTransactionByResponse
+        parent: rest.services_transform_representation.response
+

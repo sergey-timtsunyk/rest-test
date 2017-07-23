@@ -6,9 +6,10 @@
  * Time: 18:32
  */
 
-namespace RestBundle\Representation;
+namespace RestBundle\Representation\Request;
 
 use JMS\Serializer\Annotation\Type;
+use RestBundle\Representation\RepresentationInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class CustomerRepresentation implements RepresentationInterface

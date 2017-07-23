@@ -13,7 +13,7 @@ class Transaction
     private $id;
 
     /**
-     * @var string
+     * @var double
      */
     private $amount;
 
@@ -26,7 +26,6 @@ class Transaction
      * @var \PaymentBundle\Entity\Customer
      */
     private $customer;
-
 
     /**
      * Get id
@@ -41,11 +40,11 @@ class Transaction
     /**
      * Set amount
      *
-     * @param string $amount
+     * @param float $amount
      *
      * @return Transaction
      */
-    public function setAmount($amount)
+    public function setAmount(float $amount)
     {
         $this->amount = $amount;
 
@@ -60,20 +59,6 @@ class Transaction
     public function getAmount()
     {
         return $this->amount;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Transaction
-     */
-    public function setDate(\DateTime $date)
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     /**
@@ -108,6 +93,18 @@ class Transaction
     public function getCustomer() : Customer
     {
         return $this->customer;
+    }
+
+    /**
+     * Set date
+     *
+     * @return Transaction
+     */
+    public function setDatePrePersist()
+    {
+        $this->date = new \DateTime();
+
+        return $this;
     }
 }
 

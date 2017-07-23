@@ -8,11 +8,9 @@
 
 namespace PaymentBundle\Persistent;
 
-
-use AuthenticationBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use PaymentBundle\Entity\Customer;
-use RestBundle\Representation\CustomerRepresentation;
+use RestBundle\Representation\Request\CustomerRepresentation;
 
 class CustomerRepository extends EntityRepository
 {
@@ -21,15 +19,15 @@ class CustomerRepository extends EntityRepository
      *
      * @return Customer
      */
-    public function createByUserRepresentation(CustomerRepresentation $representation) : Customer
+    public function createByCustomerRepresentation(CustomerRepresentation $representation) : Customer
     {
-        $user = new Customer();
-        $user->setName($representation->getName());
-        $user->setCnp($representation->getCpn());
+        $customer = new Customer();
+        $customer->setName($representation->getName());
+        $customer->setCnp($representation->getCpn());
 
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush($user);
+        $this->getEntityManager()->persist($customer);
+        $this->getEntityManager()->flush($customer);
 
-        return $user;
+        return $customer;
     }
 }
