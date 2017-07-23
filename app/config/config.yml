@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: doctrine.yml }
+    - { resource: doctrine_migrations.yml }
     - { resource: framework.yml }
     - { resource: security.yml }
     - { resource: services.yml }
