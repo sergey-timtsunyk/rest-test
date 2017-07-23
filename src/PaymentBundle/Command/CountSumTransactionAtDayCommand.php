@@ -29,13 +29,6 @@ class CountSumTransactionAtDayCommand extends ContainerAwareCommand
      */
     private $countTransactionRepository;
 
-    protected function init()
-    {
-        $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->transactionRepository = $this->entityManager->getRepository(Transaction::class);
-        $this->countTransactionRepository = $this->entityManager->getRepository(CountTransaction::class);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -93,5 +86,12 @@ class CountSumTransactionAtDayCommand extends ContainerAwareCommand
         $this->entityManager->persist($countTransaction);
         $this->entityManager->flush();
 
+    }
+
+    private function init()
+    {
+        $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $this->transactionRepository = $this->entityManager->getRepository(Transaction::class);
+        $this->countTransactionRepository = $this->entityManager->getRepository(CountTransaction::class);
     }
 }
