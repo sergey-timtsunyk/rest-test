@@ -8,6 +8,7 @@ security:
         fos_userbundle:
             id: fos_user.user_provider.username  #fos_user.user_manager       # fos_user.user_provider.username_email does not seem to work (OAuth-spec related ("username + password") ?)
     firewalls:
+
         oauth_token:                                   # Everyone can access the access token URL.
             pattern: ^/oauth/v2/token
             security: false
@@ -20,16 +21,18 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern:      .*
+            pattern: ^/
+            access_denied_url: /login
             form-login:
                 provider:       fos_userbundle
                 login_path:     /login
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
+
             logout:
                 path: /logout
-                target: /
+                target: /login
             anonymous:    true
 
     access_control:
@@ -43,15 +46,12 @@ security:
         - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # URL of FOSUserBundle which need to be available to anonymous users
+        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/rest/doc, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY } # for the case of a failed login
-        - { path: ^/user/new$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/check-confirmation-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/confirm/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/confirmed$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/request-reset-password$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/send-resetting-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/check-resetting-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/reset-password/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Secured part of the site
