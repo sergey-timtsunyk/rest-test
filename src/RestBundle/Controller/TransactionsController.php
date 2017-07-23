@@ -16,6 +16,7 @@ use PaymentBundle\Entity\Customer;
 use PaymentBundle\Entity\Transaction;
 use RestBundle\Representation\Request\TransactionsRepresentation;
 use RestBundle\Services\TransformRepresentation\TransformByResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,6 +28,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class TransactionsController extends FOSRestController
 {
     /**
+     * @Cache(expires="60minute")
+     *
      * @ApiDoc(
      *     description="Get transaction",
      *     headers={
@@ -67,6 +70,8 @@ class TransactionsController extends FOSRestController
     }
 
     /**
+     * @Cache(expires="60minute")
+     *
      * @ApiDoc(
      *     description="Get collection transactions by filter",
      *     headers={
@@ -116,6 +121,7 @@ class TransactionsController extends FOSRestController
     }
 
     /**
+     * @Cache(expires="60minute")
      *
      * @ApiDoc(
      *     description="Create a new transaction",
@@ -164,6 +170,8 @@ class TransactionsController extends FOSRestController
     }
 
     /**
+     * @Cache(expires="60minute")
+     *
      * @ApiDoc(
      *     description="Update a new transaction",
      *     headers={

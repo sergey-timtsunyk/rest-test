@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use PaymentBundle\Entity\Customer;
 use RestBundle\Representation\Request\CustomerRepresentation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,6 +27,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CustomersController extends FOSRestController
 {
     /**
+     * @Cache(expires="60minute")
+     *
      * @View(serializerGroups={"created"})
      *
      * @ApiDoc(
