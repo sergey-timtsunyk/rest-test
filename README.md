@@ -21,6 +21,8 @@ Created user admin<br>
 </code>
 
 
+{base_url}/rest/doc - Rest Api documentation
+
 {base_url}/oauth/v2/token
 {
     "grant_type": "password",

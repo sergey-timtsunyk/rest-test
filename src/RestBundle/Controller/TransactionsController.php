@@ -6,11 +6,12 @@
  * Time: 21:24
  */
 
-namespace RestBundle\ResourceHandler;
+namespace RestBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use PaymentBundle\Entity\Customer;
 use PaymentBundle\Entity\Transaction;
 use RestBundle\Representation\Request\TransactionsRepresentation;
@@ -21,11 +22,34 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Resource handler to the transactions
- * @package RestBundle\ResourceHandler
+ * @package RestBundle\Controller
  */
-class TransactionsHandler extends FOSRestController
+class TransactionsController extends FOSRestController
 {
     /**
+     * @ApiDoc(
+     *     description="Get transaction",
+     *     headers={
+     *          {
+     *              "name"="Authorization",
+     *              "required" = "true",
+     *              "description"="Use authentication token [Bearer access_token]"
+     *          },
+     *          {
+     *              "name"="Content-Type",
+     *              "required" = "true",
+     *              "description"="Type must be [application/json]"
+     *          },
+     *      },
+     *      parameters={
+     *          {"name"="customer", "dataType"="integer", "required"=true, "description"="Customer id"},
+     *          {"name"="transaction", "dataType"="integer", "required"=true, "description"="Transaction id"},
+     *      },
+     *      output="RestBundle\Representation\Response\TransactionsRepresentation",
+     *      statusCodes={
+     *         200="Returned when successful"
+     *      }
+     * )
      * @param Customer $customer
      * @param Transaction $transaction
      *
@@ -43,6 +67,26 @@ class TransactionsHandler extends FOSRestController
     }
 
     /**
+     * @ApiDoc(
+     *     description="Get collection transactions by filter",
+     *     headers={
+     *          {
+     *              "name"="Authorization",
+     *              "required" = "true",
+     *              "description"="Use authentication token [Bearer access_token]"
+     *          },
+     *          {
+     *              "name"="Content-Type",
+     *              "required" = "true",
+     *              "description"="Type must be [application/json]"
+     *          },
+     *      },
+     *      output="RestBundle\Representation\Response\TransactionsRepresentation",
+     *      statusCodes={
+     *         200="Returned when successful, collection this resource"
+     *      }
+     * )
+     *
      * @QueryParam(name="customerId", requirements="\d+", default="0", description="")
      * @QueryParam(name="amount", requirements="^\d{1,10}.\d{2}$", default="0", description="format=d.dd")
      * @QueryParam(name="date",  requirements="^\d{2}.\d{2}.\d{4}$", default="", description="format=d.m.Y")
@@ -72,6 +116,31 @@ class TransactionsHandler extends FOSRestController
     }
 
     /**
+     *
+     * @ApiDoc(
+     *     description="Create a new transaction",
+     *     headers={
+     *          {
+     *              "name"="Authorization",
+     *              "required" = "true",
+     *              "description"="Use authentication token [Bearer access_token]"
+     *          },
+     *          {
+     *              "name"="Content-Type",
+     *              "required" = "true",
+     *              "description"="Type must be [application/json]"
+     *          },
+     *      },
+     *      parameters={
+     *          {"name"="customer", "dataType"="integer", "required"=true, "description"="Customer id"},
+     *      },
+     *      input="RestBundle\Representation\Request\TransactionsRepresentation",
+     *      output="RestBundle\Representation\Response\FullTransactionRepresentation",
+     *      statusCodes={
+     *         201="Returned when created"
+     *      }
+     * )
+     *
      * @param Customer $customer
      * @param Request $request
      *
@@ -86,10 +155,39 @@ class TransactionsHandler extends FOSRestController
             ->getRepository(Transaction::class)
             ->createByTransactionRepresentation($customer, $transactionRepresentation);
 
-        return $this->handleView($this->view(["id" => $transaction->getId()], 201));
+        return $this->handleView($this->view(
+            $this
+                ->getTransformUpdateTransactionRepresentationResponse()
+                ->transactionsRepresentationArrayFormat($transaction),
+            201)
+        );
     }
 
     /**
+     * @ApiDoc(
+     *     description="Update a new transaction",
+     *     headers={
+     *          {
+     *              "name"="Authorization",
+     *              "required" = "true",
+     *              "description"="Use authentication token [Bearer access_token]"
+     *          },
+     *          {
+     *              "name"="Content-Type",
+     *              "required" = "true",
+     *              "description"="Type must be [application/json]"
+     *          },
+     *      },
+     *      parameters={
+     *          {"name"="transaction", "dataType"="integer", "required"=true, "description"="Transaction id"},
+     *      },
+     *      input="RestBundle\Representation\Request\TransactionsRepresentation",
+     *      output="RestBundle\Representation\Response\FullTransactionRepresentation",
+     *      statusCodes={
+     *         200="Returned when created"
+     *      }
+     * )
+     *
      * @param Transaction $transaction
      * @param Request $request
      *
@@ -110,6 +208,28 @@ class TransactionsHandler extends FOSRestController
     }
 
     /**
+     * @ApiDoc(
+     *     description="Deleted transaction",
+     *     headers={
+     *          {
+     *              "name"="Authorization",
+     *              "required" = "true",
+     *              "description"="Use authentication token [Bearer access_token]"
+     *          },
+     *          {
+     *              "name"="Content-Type",
+     *              "required" = "true",
+     *              "description"="Type must be [application/json]"
+     *          },
+     *      },
+     *      parameters={
+     *          {"name"="transaction", "dataType"="integer", "required"=true, "description"="Transaction id"},
+     *      },
+     *      statusCodes={
+     *         200="Returned when deleted"
+     *      }
+     * )
+     *
      * @param Transaction $transaction
      *
      * @return Response

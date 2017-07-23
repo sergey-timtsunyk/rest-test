@@ -31,6 +31,7 @@ class CustomerRepresentation implements RepresentationInterface
      * @Type("string")
      *
      * @Assert\Type("string")
+     * @Assert\NotBlank()
      * @Assert\Length(
      *     min = 13,
      *     max = 13,

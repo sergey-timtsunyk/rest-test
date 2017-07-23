@@ -2,9 +2,7 @@
 
 namespace PaymentBundle\Entity;
 
-/**
- * Transaction
- */
+
 class Transaction
 {
     /**
@@ -12,6 +10,7 @@ class Transaction
      */
     private $id;
 
+    //@TODO create to UUID
     /**
      * @var double
      */

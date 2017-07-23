@@ -2,18 +2,21 @@
 
 namespace PaymentBundle\Entity;
 
-/**
- * Customer
- */
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\Groups;
+
 class Customer
 {
     /**
      * @var integer
      *
-     * @TODO remove to UUID
+     * @Serializer\Type("integer")
+     * @Serializer\SerializedName("customerId")
+     * @Groups({"created"})
      */
     private $id;
 
+    //@TODO create to UUID
     /**
      * @var string
      */

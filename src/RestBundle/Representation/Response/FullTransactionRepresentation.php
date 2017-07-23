@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use RestBundle\Representation\RepresentationInterface;
 
-class UpdateTransactionsRepresentation implements RepresentationInterface
+class FullTransactionRepresentation implements RepresentationInterface
 {
     /**
      * @var integer

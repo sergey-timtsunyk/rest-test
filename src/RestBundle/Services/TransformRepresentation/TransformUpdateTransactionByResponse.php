@@ -11,7 +11,7 @@ namespace RestBundle\Services\TransformRepresentation;
 
 use PaymentBundle\Entity\Transaction;
 use RestBundle\Representation\RepresentationInterface;
-use RestBundle\Representation\Response\UpdateTransactionsRepresentation;
+use RestBundle\Representation\Response\FullTransactionRepresentation;
 
 class TransformUpdateTransactionByResponse extends TransformByResponse
 {
@@ -22,7 +22,7 @@ class TransformUpdateTransactionByResponse extends TransformByResponse
      */
     protected function createRepresentation(Transaction $transaction): RepresentationInterface
     {
-        return new UpdateTransactionsRepresentation(
+        return new FullTransactionRepresentation(
             $transaction->getCustomer()->getId(),
             $transaction->getId(),
             $transaction->getAmount(),

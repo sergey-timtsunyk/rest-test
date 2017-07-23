@@ -1,7 +1,7 @@
 rest_customer:
-    resource: RestBundle\ResourceHandler\CustomersHandler
+    resource: RestBundle\Controller\CustomersController
     type: rest
 
 rest_transaction:
-    resource: RestBundle\ResourceHandler\TransactionsHandler
+    resource: RestBundle\Controller\TransactionsController
     type: rest
