@@ -1,0 +1,16 @@
+PaymentBundle\Entity\CountTransaction:
+    type: entity
+    repositoryClass: PaymentBundle\Persistent\CountTransactionRepository
+    table: pay_count_transaction
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        sum:
+            type: float
+        date:
+            type: date
+    lifecycleCallbacks: {  }

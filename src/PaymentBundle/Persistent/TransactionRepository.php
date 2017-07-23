@@ -112,14 +112,32 @@ class TransactionRepository extends EntityRepository
         $qb->select(['t.id as transactionId','t.amount', 'DATE_FORMAT(t.date, \'%d.%m.%Y\') as date'])
             ->from(Transaction::class, 't');
 
-        empty($customerId) ?: $qb->andWhere("t.customer = :customer")->setParameter("customer", $customerId);
-        empty($amount) ?: $qb->andWhere("t.amount = :amount")->setParameter("amount", $amount);
-        empty($date) ?: $qb->andWhere("t.date BETWEEN :from AND :to")
-            ->setParameter("from", new \DateTime($date." 00:00:00"))
-            ->setParameter("to", new \DateTime($date." 23:59:59"));
+        empty($customerId) ?: $qb->andWhere('t.customer = :customer')->setParameter('customer', $customerId);
+        empty($amount) ?: $qb->andWhere('t.amount = :amount')->setParameter('amount', $amount);
+        empty($date) ?: $qb->andWhere($qb->expr()->between('t.date', ':from', ':to'))
+            ->setParameter('from', new \DateTime($date.' 00:00:00'))
+            ->setParameter('to', new \DateTime($date.' 23:59:59'));
 
         $qb->orderBy('t.id', 'ASC');
 
         return $qb->getQuery()->setMaxResults($limit)->setFirstResult($offset)->getArrayResult();
+    }
+
+    /**
+     * @param \DateTime $date
+     *
+     * @return float
+     */
+    public function sumByDate(\DateTime $date) : float
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select(['SUM(t.amount)'])
+            ->from(Transaction::class, 't')
+            ->andWhere($qb->expr()->between('t.date', ':from', ':to'))
+            ->setParameter('from', new \DateTime($date->format('d.m.Y').' 00:00:00'))
+            ->setParameter('to', new \DateTime($date->format('d.m.Y').' 23:59:59'));
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }
