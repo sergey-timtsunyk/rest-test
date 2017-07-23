@@ -24,3 +24,9 @@ services:
         class: RestBundle\Services\TransformRepresentation\TransformUpdateTransactionByResponse
         parent: rest.services_transform_representation.response
 
+    rest.services_subscriber.loggin:
+        class: RestBundle\Services\Subscriber\Logging\LogginRestSubscriber
+        arguments: ['@monolog.logger.rest_log', '@router']
+        tags:
+            - { name: kernel.event_subscriber }
+

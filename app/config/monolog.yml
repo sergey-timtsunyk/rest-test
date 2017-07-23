@@ -4,8 +4,12 @@ monolog:
             type: stream
             # log to app/logs/(environment).log
             path: "%kernel.logs_dir%/rest.log"
+            level: info
+
 
         syslog_handler:
             type: syslog
             # log error-level messages and higher
             level: error
+
+    channels: ["rest_log"]
