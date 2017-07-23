@@ -85,5 +85,10 @@ class Customer
     {
         return $this->cnp;
     }
+
+    public function __toString()
+    {
+        return sprintf('%s [%s]', $this->name, $this->cnp);
+    }
 }
 

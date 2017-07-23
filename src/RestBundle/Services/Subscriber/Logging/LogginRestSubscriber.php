@@ -43,11 +43,11 @@ class LogginRestSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             KernelEvents::RESPONSE => [
-                array('onKernelResponse'),
+                ['onKernelResponse'],
             ],
-        );
+        ];
     }
 
     /**

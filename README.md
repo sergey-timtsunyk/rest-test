@@ -21,6 +21,15 @@ Created user admin<br>
 </code>
 
 
+<code>
+$ php app/console fos:user:create --super-admin<br>
+Please choose a username:admin<br>
+Please choose an email:admin@example.com<br>
+Please choose a password:admin<br>
+Created user admin<br>
+</code>
+
+
 {base_url}/rest/doc - Rest Api documentation
 
 {base_url}/oauth/v2/token
@@ -52,3 +61,8 @@ Created user admin<br>
 {base_url}/api
  Authorization: Bearer MWNiNTViYTZjNDlkNTM3OWIwYzIwZjMyNmNhN…
  Content-Type: application/json
+ 
+ 
+ bower install ./vendor/sonata-project/admin-bundle/bower.json
+ $ php app/console cache:clear
+$ php app/console assets:install

@@ -6,6 +6,7 @@ imports:
     - { resource: services.yml }
     - { resource: fos_config.yml }
     - { resource: monolog.yml }
+    - { resource: sonata.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -18,5 +19,3 @@ twig:
     strict_variables: '%kernel.debug%'
 
 nelmio_api_doc: ~
-
-

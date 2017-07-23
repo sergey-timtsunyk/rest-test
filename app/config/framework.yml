@@ -19,3 +19,5 @@ framework:
         handler_id: ~
     fragments: ~
     http_method_override: true
+    translator:      { fallback: "%locale%" }
+    default_locale:  "%locale%"

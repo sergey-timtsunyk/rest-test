@@ -28,6 +28,8 @@
         "nelmio/api-doc-bundle": "2.13.2",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
+        "sonata-project/admin-bundle": "3.x-dev",
+        "sonata-project/doctrine-orm-admin-bundle": "3.x-dev",
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/swiftmailer-bundle": "2.3.10",
         "symfony/symfony": "2.8.*",
