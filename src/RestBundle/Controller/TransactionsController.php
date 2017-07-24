@@ -28,6 +28,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class TransactionsController extends FOSRestController
 {
     /**
+     * This Api method has cash at 60 minute
+     *
      * @Cache(expires="60minute")
      *
      * @ApiDoc(
@@ -70,6 +72,8 @@ class TransactionsController extends FOSRestController
     }
 
     /**
+     * This Api method has cash at 60 minute
+     *
      * @Cache(expires="60minute")
      *
      * @ApiDoc(
@@ -121,8 +125,6 @@ class TransactionsController extends FOSRestController
     }
 
     /**
-     * @Cache(expires="60minute")
-     *
      * @ApiDoc(
      *     description="Create a new transaction",
      *     headers={
@@ -170,8 +172,6 @@ class TransactionsController extends FOSRestController
     }
 
     /**
-     * @Cache(expires="60minute")
-     *
      * @ApiDoc(
      *     description="Update a new transaction",
      *     headers={
